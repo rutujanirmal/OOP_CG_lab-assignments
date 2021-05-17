@@ -1,0 +1,131 @@
+//Imagine a publishing company which does marketing for book and audio cassette versions.
+//Create a class publication that stores the title (a string) and price (type float) of publications.
+//From this class derive two classes:
+//book which adds a page count (type int) and tape which adds a playing time in minutes (type float).
+//Write a program that instantiates the book and tape class, allows user to enter data and displays the data members
+//If an exception is caught, replace all the data member values with zero values.
+
+#include <iostream>
+#include <string>
+using namespace std;
+
+class Publication{
+    protected:
+        string title;
+        float price;
+    public:
+        Publication(){}
+        Publication(string t,float p){
+            title=t;
+            price=p;
+        }
+};
+
+class Book : public Publication{
+    private:
+        int pg_count;
+    public:
+        Book(){}
+        Book(string t,float p,int pc):Publication(t,p)
+        {
+            pg_count=pc;
+        }
+        void display(){
+            cout<<"Title :: "<<title<<endl;
+            cout<<"Price :: "<<price<<endl;
+            cout<<"Pgcount :: "<<pg_count<<endl;
+        }
+};
+
+class tape:public Publication{
+    private:
+        float time;
+    public:
+        tape(){}
+        tape(string t,float p,float tim):Publication(t,p){
+            time=tim;
+        }
+        void dispaly(){
+            cout<<"Title :: "<<title<<endl;
+            cout<<"Price :: "<<price<<endl;
+            cout<<"Time :: "<<time<<" min"<<endl;
+        }
+};
+
+int main(){
+    int ch,loop1=1,n,pg_count;
+    string title;
+    Book b1;
+    tape t1;
+    float price,min;
+    do{
+    cout<<"What u want to\n1.Enter BOOK\n2.Enter TAPE\n3.Display Book\n4.Display Tape\nEnter here:: ";
+    cin>>ch;
+    switch (ch)
+    {
+    case 1:
+    {
+        cout<<"ENTER DATA \n";
+        cout<<"Title : ";
+        cin>>title;
+        cout<<"Price :";
+        cin>>price;
+        try{
+        cout<<"Page count : ";
+        cin>>pg_count;
+        Book b1(title,price,pg_count);
+        if(pg_count==0){
+            throw  pg_count;
+        }
+        }
+        catch(int a){
+            cout<<"\nPage count can not be zero\nDefault values assigned";
+            title="None";
+            price=0;
+            pg_count=0;
+            Book b1(title,price,pg_count);
+        }
+    }
+    break;
+    case 2:
+    {
+        cout<<"ENTER DATA \n";
+        cout<<"Title : ";
+        cin>>title;
+        cout<<"Price :";
+        cin>>price;
+        try{
+        cout<<"Time in mins : ";
+        cin>>min;
+        tape t1(title,price,min);
+        if(min==0){
+            throw  min;
+        }
+        }
+        catch(int a){
+            cout<<"\nMinutes can not be zero\nDefault values assigned";
+            title="None";
+            price=0;
+            min=0;
+            tape t1(title,price,min);
+        }
+    }
+    break;
+    case 3:
+    {
+        b1.display();
+    }
+    break;
+    case 4:
+    {
+        t1.dispaly();
+    }
+    break;
+    default:
+        break;
+    }
+    cout<<"Do u want to continue(0/1) : ";
+    cin>>loop1;
+    }while(loop1);
+    return 0;
+}
