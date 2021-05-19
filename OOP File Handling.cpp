@@ -51,7 +51,7 @@ int main()
     cout<<"\nInformation of Employees is as follows :-\n";
     for(i=0;i<n;i++)
     {
-        f.write((char*)&o[i],sizeof o[i]);
+        f.read((char*)&o[i],sizeof o[i]);
         o[i].display();
     }
     f.close();
