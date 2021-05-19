@@ -1,18 +1,11 @@
-#include <iostream>
-
-// Program for translation,rotation & scaling on 2D
-
-/*
- * Write C++/Java program to draw 2-D object and perform following basic transformations,
-a) Scaling
-b) Translation
-c) Rotation
-	Use operator overloading.
- */
-
+//2D transformation
+//Translation
+//Scaling
+//Rotation
 #include<stdio.h>
 #include<math.h>
 #include<graphics.h>
+#include<iostream>
 
 using namespace std;
 
@@ -168,23 +161,21 @@ polygon polygon :: operator-(polygon p2)
 
 int main()
 {
-	
 	polygon p1, p2, p3;
-	int gd=DETECT,gm, sw,off;
+	int gd=DETECT,gm, sw;
 
-	do{	
-	cleardevice();
+
 	p1.getpoly();
 	p1.displaypoly();
 	initgraph(&gd,&gm,NULL) ;
 	p1.drawpoly();
-		
-			cout<<"\t\t **** MENU ****";
+
+	do{
+			cout<<"\t\t * MENU *";
 			cout<<"\n1. TRANSLATION";
 			cout<<"\n2. SCALING";
 			cout<<"\n3. CLOCKWISE ROTATION";
 			cout<<"\n4. ANTICLOKWISE ROTATION";
-			cout<<"\n5. EXIT";
 			cout<<"\nPlease! Enter your choice : ";
 			cin>>sw;
 			switch(sw)
@@ -212,18 +203,16 @@ int main()
 					p3.displaypoly();
 					p3.drawpoly();
 				    break;
-			  case 5:
-			  		exit(0);
 			}
-			cin>>off;
-	}while(true);
+			}while(sw!=5);
 
+	getch();
 
 	return 0;
 }
+
 /*
 INPUT
-
 vertices: 4
 polygon Co-ordinates
 0
@@ -246,7 +235,4 @@ polygon Co-ordinates
 
 4
 45
-
-
-
 */
