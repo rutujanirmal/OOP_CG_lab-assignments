@@ -1,9 +1,8 @@
-//Student Database
+//practical 1:Students database
 #include<iostream>
 using namespace std;
 
 class per_info{
-    private:
         string dob,lic,bloodgrp;
     public:
         per_info();
@@ -31,20 +30,22 @@ class student{
         string name;
         int rollNo;
         string cls;
-        string div;
+        char div;
         long phone;
         string address;  
         static int count; 
     public:
+        
+        
         void getData(per_info &);
         void printData(per_info &);
-        inline static void inc_count(){
+        inline static void int_count(){
             count++;
         }
         inline static void show_count(){
             cout<<"\nTotal no of Records : "<<count;
         }
-        student();
+        student ();
         student(student &);
         ~student(){
             cout<<"\nDestructor called\nRecord deleted sucessfully";
@@ -56,7 +57,7 @@ student::student(){
     name="Rutuja";
     rollNo=45;
     cls="SE";
-    div="A";
+    div='A';
     phone=888858;
     address="Pune";
 }
@@ -71,7 +72,7 @@ student::student(student &obj){
 }
 //Fuction to input data
 void student::getData(per_info &obj){
-    cout<<"Enter data here\n";
+    cout<<"\n\nEnter data here\n";
     cout<<"Name :: ";
     cin>>name;
     cout<<"Rollno::";
@@ -95,7 +96,7 @@ void student::getData(per_info &obj){
 //Function to output data
 void student::printData(per_info &obj){
     cout<<"\nSTUDENT DETAILS\n";
-    cout<<"******************"<<endl
+    cout<<"******"<<endl
         <<"Name :: "<<name<<endl
         <<"Roll no ::"<<rollNo<<endl
         <<"Date of Birth ::"<<obj.dob<<endl
@@ -105,7 +106,7 @@ void student::printData(per_info &obj){
         <<"Phone no ::"<<phone<<endl
         <<"Address ::"<<address<<endl
         <<"Enter the Driving license number ::"<<obj.lic<<endl
-        <<"******************"<<endl;
+        <<"******"<<endl;
     }  
 
 //main function
@@ -133,18 +134,20 @@ int main(){
         {
             for(int i=0;i<n;i++){
                 sobj[i].getData(pobj[i]);
-                sobj[i].inc_count();
+                sobj[i].int_count();
             }
+            break;
         }
-
+            
         case 2://Display database
         {
             sobj[0].show_count();
             for(int i=0;i<n;i++){
                 sobj[i].printData(pobj[i]);
             }
+            break;
         }
-
+            
         case 3://copy constructor
         {
             student s1;
@@ -152,29 +155,37 @@ int main(){
             s1.getData(p1);
             student s2(s1);
             per_info p2(p1);
+
             cout<<"\nCopy contructor called";
             s2.printData(p2);
+            break;
         }
-
+            
         case 4://Default contructor
         {
             student s1;
             per_info p1;
             cout<<"Default constructor called";
             s1.printData(p1);
+            break;
         }
-
+            
         case 5://Destructor
         {
             delete[] sobj;
             delete[] pobj;
+            break;
         }
-        default:
-            cout<<"\nWant to continue(y/n) :: ";
-            cin>>ans;
+        default:{
+            cout<<"You Entered Something wrong";
+            break;
         }
+        }
+        cout<<"\nWant to continue(y/n) :: ";
+        cin>>ans;
+        
 
-    }while(ans=='y');
+    }while(ans=='y' || ans=='Y');
     
     return 0;
 }
